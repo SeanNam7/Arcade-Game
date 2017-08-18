@@ -8,8 +8,8 @@ var Enemy = function(x, y, speed, direction) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-
-
+    width: 50;
+    height:50;
 };
 
 // x` the enemy's position, required method for game
@@ -41,6 +41,13 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
+    width: 50;
+    height: 50;
+};
+
+Player.prototype.reset=function() {
+    this.x = 203;
+    this.y = 380;
 };
 
 Player.prototype.update = function(dt) {
@@ -48,20 +55,16 @@ Player.prototype.update = function(dt) {
     this.y = this.y;
 
     if(this.x >= 600) {
-        this.x = 203;
-        this.y = 380;
+        player.reset();
     }
     if(this.x <= 0) {
-        this.x = 203;
-        this.y = 380;
+        player.reset();
     }
     if(this.y >= 500) {
-        this.x = 203;
-        this.y = 380;
+        player.reset();
     }
     if(this.y <= 10) {
-        this.x = 203;
-        this.y = 380;
+        player.reset();
     }
 };
 
