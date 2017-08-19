@@ -64,6 +64,19 @@ Player.prototype.update = function(dt) {
     if(this.y <= 10) {
         player.reset();
     }
+
+    // Checks the player's collisions with enemies
+    checkCollisions = function() {
+        for (var i = 0; i < allEnemies.length; i++) {
+            if (player.x < allEnemies[i].x + 70 &&
+                player.x + 65 > allEnemies[i].x &&
+                player.y < allEnemies[i].y + 30 &&
+                30 + player.y > allEnemies[i].y) {
+                    //to reset the player
+                    player.reset();
+            }
+        }
+    }
 };
 
 Player.prototype.render = function() {
@@ -86,17 +99,7 @@ Player.prototype.handleInput = function(movement) {
     }
 };
 
-// Checks the player's collisions with enemies
-Player.prototype.collisionCheck = function() {
-    for (var i = 0; i < allEnemies.length; i++) {
-        if (player.x < allEnemies[i].x + 70 &&
-            player.x + 65 > allEnemies[i].x &&
-            player.y < allEnemies[i].y + 30 &&
-            30 + player.y > allEnemies[i].y) {
-            player.reset(); //to reset the
-        }
-    }
-};
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
