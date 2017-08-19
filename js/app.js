@@ -8,8 +8,6 @@ var Enemy = function(x, y, speed, direction) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    width: 50;
-    height:50;
 };
 
 // x` the enemy's position, required method for game
@@ -45,7 +43,7 @@ var Player = function(x, y) {
     height: 50;
 };
 
-Player.prototype.reset=function() {
+Player.prototype.reset = function() {
     this.x = 203;
     this.y = 380;
 };
@@ -88,6 +86,17 @@ Player.prototype.handleInput = function(movement) {
     }
 };
 
+// Checks the player's collisions with enemies
+Player.prototype.collisionCheck = function() {
+    for (var i = 0; i < allEnemies.length; i++) {
+        if (player.x < allEnemies[i].x + 70 &&
+            player.x + 65 > allEnemies[i].x &&
+            player.y < allEnemies[i].y + 30 &&
+            30 + player.y > allEnemies[i].y) {
+            player.reset(); //to reset the
+        }
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
