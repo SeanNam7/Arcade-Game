@@ -83,7 +83,8 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
+        player.enemyCollision();
+        //checkCollisions(dt);
     }
 
     /* This is called by the update function and loops through all of the

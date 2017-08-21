@@ -4,6 +4,8 @@ var Enemy = function(x, y, speed, direction) {
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.width = 75;
+    this.height = 65;
     this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -38,9 +40,9 @@ Enemy.prototype.render = function() {
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
+    this.width = 65;
+    this.height = 75;
     this.sprite = 'images/char-boy.png';
-    width: 50;
-    height: 50;
 };
 
 Player.prototype.reset = function() {
@@ -64,19 +66,6 @@ Player.prototype.update = function(dt) {
     if(this.y <= 10) {
         player.reset();
     }
-
-    // Checks the player's collisions with enemies
-    checkCollisions = function() {
-        for (var i = 0; i < allEnemies.length; i++) {
-            if (player.x < allEnemies[i].x + 70 &&
-                player.x + 65 > allEnemies[i].x &&
-                player.y < allEnemies[i].y + 30 &&
-                30 + player.y > allEnemies[i].y) {
-                    //to reset the player
-                    player.reset();
-            }
-        }
-    }
 };
 
 Player.prototype.render = function() {
@@ -99,13 +88,30 @@ Player.prototype.handleInput = function(movement) {
     }
 };
 
+// Enemy collision function
+Player.prototype.enemyCollision = function() {
+    checkCollisions(allEnemies);
+
+}
 
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Checks the player's collisions with other objects
+var checkCollisions = function(targetArray) {
+    for (var i = 0; i < targetArray.length; i++) {
+        if (player.x < (targetArray[i].x + targetArray[i].width) &&
+            (player.x + player.width) > targetArray[i].x &&
+            player.y < (targetArray[i].y + targetArray[i].height) &&
+            (player.y + player.height) > targetArray[i].y) {
+                //to reset the player
+                player.reset();
+            }
+        }
+    }
 
+// Instantiate Player
 var player = new Player(203, 380);
+
+// Instantiate Enemy
 var allEnemies = [
     new Enemy(30, 140,1),
     new Enemy(200,60,1),
