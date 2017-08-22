@@ -91,9 +91,19 @@ Player.prototype.handleInput = function(movement) {
 
 // Enemy collision function
 Player.prototype.enemyCollision = function() {
-    checkCollisions(allEnemies);
+    var bug = checkCollisions(allEnemies);
+    if (bug) {
+        if(player.lives > 0) {
+            player.lives -= 1;
+            player.reset();
+        } else {
+            player.lives === 0;
+        }
 
-
+        if(player.lives === 0) {
+            alert("Game Over")
+        }
+    }
 }
 
 
