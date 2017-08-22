@@ -46,16 +46,21 @@ var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
 };
 
+
+// Resets the position of the player to the original location
 Player.prototype.reset = function() {
     this.x = 303;
     this.y = 460;
 };
 
+// Restarts the game.
 Player.prototype.restart = function() {
     player.lives = 5;
     player.score = 0;
+    $("#lives").text("Lives: " + player.lives);
+    $("#score").text("Score: " + player.score);
 }
-
+// Implemented the Score mechanism within update vs. separate prototype
 Player.prototype.update = function(dt) {
     this.x = this.x;
     this.y = this.y;
@@ -72,7 +77,13 @@ Player.prototype.update = function(dt) {
         player.reset();
     }
     if(this.y <= 10) {
+        player.score += 100;
+        $("#score").text("Score: " + player.score);
         player.reset();
+        if(player.score === 1000) {
+            alert("YOU WIN!!! Press OK to restart.");
+            player.restart;
+        }
     }
 };
 
@@ -102,7 +113,7 @@ Player.prototype.enemyCollision = function() {
         player.lives -= 1;
         $("#lives").text("Lives: " + player.lives);
         if(player.lives == 0) {
-            alert("Game Over");
+            alert("Game Over. Click OK to restart");
             player.restart();
         }
     }
