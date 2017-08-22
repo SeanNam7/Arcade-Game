@@ -82,7 +82,7 @@ Player.prototype.update = function(dt) {
         player.reset();
         if(player.score === 1000) {
             alert("YOU WIN!!! Press OK to restart.");
-            player.restart;
+            player.restart();
         }
     }
 };
