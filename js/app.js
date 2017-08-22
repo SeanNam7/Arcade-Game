@@ -77,19 +77,23 @@ Player.prototype.update = function(dt) {
         player.reset();
     }
     if(this.y <= 10) {
-        player.score += 100;
-        $("#score").text("Score: " + player.score);
+        player.scoreupdate();
         player.reset();
-        if(player.score === 1000) {
-            alert("YOU WIN!!! Press OK to restart.");
-            player.restart();
-        }
     }
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Player.prototype.scoreupdate = function() {
+    player.score += 100;
+    $("#score").text("Score: " + player.score);
+    if(player.score === 1000) {
+            alert("YOU WIN!!! Press OK to restart.");
+            player.restart();
+    }
+}
 
 Player.prototype.handleInput = function(movement) {
 
