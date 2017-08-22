@@ -20,8 +20,8 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + (Math.random() * 350 * dt);
 
-    if (this.x >= 600) {
-        this.x = 0;
+    if (this.x >= 707) {
+        this.x = -50;
     }
 
     /* Multiply speed(distance/time) by dt(time), so (distance/time * dt = distance)
@@ -42,22 +42,23 @@ var Player = function(x, y) {
     this.y = y;
     this.width = 65;
     this.height = 75;
+    this.lives = 5;
     this.sprite = 'images/char-boy.png';
 };
 
 Player.prototype.reset = function() {
-    this.x = 203;
-    this.y = 380;
+    this.x = 303;
+    this.y = 460;
 };
 
 Player.prototype.update = function(dt) {
     this.x = this.x;
     this.y = this.y;
 
-    if(this.x >= 600) {
+    if(this.x >= 700) {
         player.reset();
     }
-    if(this.x <= 0) {
+    if(this.x <= -10) {
         player.reset();
     }
     if(this.y >= 500) {
@@ -92,6 +93,7 @@ Player.prototype.handleInput = function(movement) {
 Player.prototype.enemyCollision = function() {
     checkCollisions(allEnemies);
 
+
 }
 
 
@@ -109,7 +111,7 @@ var checkCollisions = function(targetArray) {
     }
 
 // Instantiate Player
-var player = new Player(203, 380);
+var player = new Player(303, 460);
 
 // Instantiate Enemy
 var allEnemies = [
