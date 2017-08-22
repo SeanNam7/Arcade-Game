@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan');
+
 body {
     background: url(../images/waterfall.gif) no-repeat fixed center/cover;
     text-align: center;
+    font-family: 'Baloo Bhaijaan', cursive;
 }
