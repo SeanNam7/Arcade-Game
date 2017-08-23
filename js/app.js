@@ -56,10 +56,10 @@ Player.prototype.reset = function() {
 
 // Restarts the game.
 Player.prototype.restart = function() {
-    player.lives = 5;
-    player.score = 0;
-    $("#lives").text("Lives: " + player.lives);
-    $("#score").text("Score: " + player.score);
+    this.lives = 5;
+    this.score = 0;
+    $("#lives").text("Lives: " + this.lives);
+    $("#score").text("Score: " + this.score);
     var allEnemies = [
         new Enemy(30,60,2),
         new Enemy(200,60,1),
@@ -69,7 +69,7 @@ Player.prototype.restart = function() {
         new Enemy(290,310,1)
     ];
 }
-// Implemented the Score mechanism within update vs. separate prototype
+
 Player.prototype.update = function(dt) {
     this.x = this.x;
     this.y = this.y;
@@ -77,17 +77,17 @@ Player.prototype.update = function(dt) {
     this.score = this.score;
 
     if(this.x >= 700) {
-        player.reset();
+        this.reset();
     }
     if(this.x <= -10) {
-        player.reset();
+        this.reset();
     }
     if(this.y >= 500) {
-        player.reset();
+        this.reset();
     }
     if(this.y <= 10) {
-        player.scoreupdate();
-        player.reset();
+        this.scoreupdate();
+        this.reset();
     }
 };
 
@@ -96,11 +96,11 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.scoreupdate = function() {
-    player.score += 100;
-    $("#score").text("Score: " + player.score);
-    if(player.score === 1000) {
+    this.score += 100;
+    $("#score").text("Score: " + this.score);
+    if(this.score === 1000) {
             alert("YOU WIN!!! Press OK to restart.");
-            player.restart();
+            this.restart();
     }
 }
 
@@ -123,11 +123,11 @@ Player.prototype.handleInput = function(movement) {
 // Enemy collision function
 Player.prototype.enemyCollision = function() {
     if (checkCollisions(allEnemies) === true) {
-        player.lives -= 1;
+        this.lives -= 1;
         $("#lives").text("Lives: " + player.lives);
-        if(player.lives == 0) {
+        if(this.lives == 0) {
             alert("Game Over. Click OK to restart");
-            player.restart();
+            this.restart();
         }
     }
 }
