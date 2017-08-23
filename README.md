@@ -3,7 +3,11 @@
 This is a simple frogger style game.
 
 ## Setup
-Download the file. Open up the index file and use ctrl + b to open the file in a browser.
+There are two options.
+<ol>
+    <li>Go to the hosted version which is available at: https://seannam7.github.io/Arcade-Game/</li>
+    <li>Download the file. Open up the index file and use ctrl + b to open the file in a browser.</li>
+</ol>
 
 ## Directions
 Use the up, down, left, right controls to move your character.
