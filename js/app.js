@@ -1,11 +1,12 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.width = 75;
     this.height = 65;
+    this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -17,7 +18,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + (Math.random() * 400 * dt);
+    this.x = this.x + ((Math.floor(Math.random() * this.speed * 400)) * dt);
 
     if (this.x >= 707) {
         this.x = -50;
@@ -59,6 +60,14 @@ Player.prototype.restart = function() {
     player.score = 0;
     $("#lives").text("Lives: " + player.lives);
     $("#score").text("Score: " + player.score);
+    var allEnemies = [
+        new Enemy(30,60,2),
+        new Enemy(200,60,1),
+        new Enemy(30,140,1),
+        new Enemy(220,140,1),
+        new Enemy(370,225,1),
+        new Enemy(290,310,1)
+    ];
 }
 // Implemented the Score mechanism within update vs. separate prototype
 Player.prototype.update = function(dt) {
