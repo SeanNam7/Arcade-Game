@@ -1,16 +1,32 @@
 "use strict";
-// Enemies our player must avoid
-var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+
+// Character super-class
+var Character = function(x, y, sprite) {
     this.x = x;
     this.y = y;
+    this.sprite = sprite;
+}
+
+// Player class
+var Player = function(x, y, sprite) {
+    Character.call(this, x, y, sprite);
+    this.width = 65;
+    this.height = 75;
+    this.lives = 5;
+    this.score = 0;
+};
+
+// Enemy class
+var Enemy = function(x, y, sprite, speed) {
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
+    Character.call(this, x, y, sprite);
     this.width = 75;
     this.height = 65;
     this.speed = ((Math.floor(Math.random() * 200) + 100) + (75 * speed));
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
+    // this.sprite = 'images/enemy-bug.png';
 };
 
 // x` the enemy's position, required method for game
@@ -34,20 +50,6 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-var Player = function(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 65;
-    this.height = 75;
-    this.lives = 5;
-    this.score = 0;
-    this.sprite = 'images/char-boy.png';
-};
-
 
 // Resets the position of the player to the original location
 Player.prototype.reset = function() {
@@ -148,16 +150,16 @@ function checkCollisions(targetArray) {
     }
 
 // Instantiate Player
-var player = new Player(303, 460);
+var player = new Player(303, 460, 'images/char-boy.png');
 
 // Instantiate Enemy
 var allEnemies = [
-    new Enemy(30,60,4),
-    new Enemy(200,60,1),
-    new Enemy(30,140,2),
-    new Enemy(220,140,1),
-    new Enemy(370,225,2),
-    new Enemy(290,310,1)
+    new Enemy(30,60,'images/enemy-bug.png',4),
+    new Enemy(200,60,'images/enemy-bug.png',1),
+    new Enemy(30,140,'images/enemy-bug.png',2),
+    new Enemy(220,140,'images/enemy-bug.png',1),
+    new Enemy(370,225,'images/enemy-bug.png',2),
+    new Enemy(290,310,'images/enemy-bug.png',1)
     ];
 
 
