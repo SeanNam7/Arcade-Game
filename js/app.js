@@ -18,32 +18,37 @@ var Player = function(x, y, sprite) {
 
 // Enemy class
 var Enemy = function(x, y, sprite, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     Character.call(this, x, y, sprite);
     this.width = 75;
     this.height = 65;
     this.speed = ((Math.floor(Math.random() * 200) + 100) + (75 * speed));
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    // this.sprite = 'images/enemy-bug.png';
 };
 
-// x` the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+/* PROTOTYPE */
+
+// Renders images onto the canvas
+Character.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+// Set up prototype delegation relationship to Character prototype using Object.create technique
+Player.prototype = Object.create(Character.prototype);
+Enemy.prototype = Object.create(Character.prototype);
+
+// Set up proper subclass constructor delegation to Character
+Player.prototype.constructor = Character;
+Enemy.prototype.constructor = Character;
+
+
+// Updates the game to show the latest sprite-positions/movement
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x = this.x + (this.speed * dt);
-
-    if (this.x >= 707) {
-        this.x = -50;
-    }
-
     /* Multiply speed(distance/time) by dt(time), so (distance/time * dt = distance)
     will give a distance of how far to move the enemy bugs on each update */
     /* This helped me figure out how to setup the enemy speed correctly */
+    this.x = this.x + (this.speed * dt);
+    if (this.x >= 707) {
+        this.x = -50;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
