@@ -61,11 +61,11 @@ Player.prototype.restart = function() {
     $("#lives").text("Lives: " + this.lives);
     $("#score").text("Score: " + this.score);
     var allEnemies = [
-        new Enemy(30,60,2),
+        new Enemy(30,60,4),
         new Enemy(200,60,1),
-        new Enemy(30,140,1),
+        new Enemy(30,140,2),
         new Enemy(220,140,1),
-        new Enemy(370,225,1),
+        new Enemy(370,225,2),
         new Enemy(290,310,1)
     ];
 }
@@ -124,7 +124,7 @@ Player.prototype.handleInput = function(movement) {
 Player.prototype.enemyCollision = function() {
     if (checkCollisions(allEnemies) === true) {
         this.lives -= 1;
-        $("#lives").text("Lives: " + player.lives);
+        $("#lives").text("Lives: " + this.lives);
         if(this.lives == 0) {
             alert("Game Over. Click OK to restart");
             this.restart();
