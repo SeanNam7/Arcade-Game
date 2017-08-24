@@ -122,7 +122,7 @@ Player.prototype.handleInput = function(movement) {
 
 // Enemy collision function
 Player.prototype.enemyCollision = function() {
-    if (checkCollisions(allEnemies) === true) {
+    if (checkCollisions.call(this, allEnemies) === true) {
         this.lives -= 1;
         $("#lives").text("Lives: " + this.lives);
         if(this.lives == 0) {
@@ -133,14 +133,14 @@ Player.prototype.enemyCollision = function() {
 }
 
 // Checks the player's collisions with other objects
-var checkCollisions = function(targetArray) {
+function checkCollisions(targetArray) {
     for (var i = 0; i < targetArray.length; i++) {
-        if (player.x < (targetArray[i].x + targetArray[i].width) &&
-            (player.x + player.width) > targetArray[i].x &&
-            player.y < (targetArray[i].y + targetArray[i].height) &&
-            (player.y + player.height) > targetArray[i].y) {
+        if (this.x < (targetArray[i].x + targetArray[i].width) &&
+            (this.x + this.width) > targetArray[i].x &&
+            this.y < (targetArray[i].y + targetArray[i].height) &&
+            (this.y + this.height) > targetArray[i].y) {
                 //to reset the player
-                player.reset();
+                this.reset();
                 return true;
             }
         }
