@@ -15,10 +15,10 @@ Use the up, down, left, right controls to move your character.
 ## Game rules
 <ol>
     <li>Hitting the bugs will make you lose a life.</li>
-    <li>Reaching the water will get you 100 points</li>
+    <li>Reaching the water will get you 100 points.</li>
     <li>If your character goes out of bounds, your position will reset to the original position but you will not lose a life.</li>
-    <li>You win if you can reach a score of 1000 points</li>
+    <li>You win if you can reach a score of 1000 points.</li>
 </ol>
 
 ## Musts
-HAVE FUN! :smile:
+HAVE FUN! :smile: :+1:
