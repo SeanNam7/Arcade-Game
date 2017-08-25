@@ -26,7 +26,7 @@ var Enemy = function(x, y, sprite, speed) {
 
 /* PROTOTYPE */
 
-// Renders images onto the canvas
+// Renders character images onto the canvas
 Character.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
@@ -49,11 +49,6 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 707) {
         this.x = -50;
     }
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Resets the position of the player to the original location
@@ -99,19 +94,19 @@ Player.prototype.update = function(dt) {
     }
 };
 
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
+// Player score
 Player.prototype.scoreupdate = function() {
+    water.play();
     this.score += 100;
     $("#score").text("Score: " + this.score);
     if(this.score === 1000) {
-            alert("YOU WIN!!! Press OK to restart.");
-            this.restart();
+        victory.play();
+        alert("YOU WIN!!! Press OK to restart.");
+        this.restart();
     }
 }
 
+// Manages player movement
 Player.prototype.handleInput = function(movement) {
 
     if(movement === 'up') {
@@ -131,6 +126,7 @@ Player.prototype.handleInput = function(movement) {
 // Enemy collision function
 Player.prototype.enemyCollision = function() {
     if (checkCollisions.call(this, allEnemies) === true) {
+        squish.play();
         this.lives -= 1;
         $("#lives").text("Lives: " + this.lives);
         if(this.lives == 0) {
@@ -140,7 +136,7 @@ Player.prototype.enemyCollision = function() {
     }
 }
 
-// Checks the player's collisions with other objects
+// Checks the player's collision with other objects
 function checkCollisions(targetArray) {
     for (var i = 0; i < targetArray.length; i++) {
         if (this.x < (targetArray[i].x + targetArray[i].width) &&
@@ -167,9 +163,15 @@ var allEnemies = [
     new Enemy(290,310,'images/enemy-bug.png',1)
     ];
 
+// Sound effects
+var victory = new Audio('sounds/FFVII.mp3');
+var squish = new Audio('sounds/squish.mp3');
+var water = new Audio('sounds/water.mp3');
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// var loop = new Audio('sounds/loop.wav');
+// document.addEventListener("load", loop.play());
+
+// This listens for key presses and sends the keys to the Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
