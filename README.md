@@ -21,4 +21,4 @@ Use the up, down, left, right controls to move your character.
 </ol>
 
 ## Musts
-HAVE FUN!
+HAVE FUN! :smile:

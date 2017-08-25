@@ -1,8 +1,8 @@
 "use strict";
 
 // 'constant' variables
-var tileWidth = 101;
-var tileHeight = 83;
+var TILE_WIDTH = 101;
+var TILE_HEIGHT = 83;
 
 // Character super-class
 var Character = function(x, y, sprite) {
@@ -107,16 +107,16 @@ Player.prototype.scoreupdate = function() {
 Player.prototype.handleInput = function(movement) {
 
     if(movement === 'up') {
-        this.y -= tileHeight;
+        this.y -= TILE_HEIGHT;
     }
     if(movement === 'right') {
-        this.x += tileWidth;
+        this.x += TILE_WIDTH;
     }
     if(movement === 'down') {
-        this.y += tileHeight;
+        this.y += TILE_HEIGHT;
     }
     if(movement === 'left') {
-        this.x -= tileWidth;
+        this.x -= TILE_WIDTH;
     }
 };
 
