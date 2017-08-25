@@ -101,7 +101,8 @@ Player.prototype.scoreupdate = function() {
     $("#score").text("Score: " + this.score);
     if(this.score === 1000) {
         victory.play();
-        alert("YOU WIN!!! Press OK to restart.");
+        // Used setTimeout because .play and alert caused random results
+        setTimeout(function() {alert("YOU WIN!!! Press OK to restart.");}, 100);
         this.restart();
     }
 }
