@@ -5,7 +5,7 @@ var Character = function(x, y, sprite) {
     this.x = x;
     this.y = y;
     this.sprite = sprite;
-}
+};
 
 // Player class
 var Player = function(x, y, sprite) {
@@ -24,20 +24,20 @@ var Enemy = function(x, y, sprite, speed) {
     this.speed = ((Math.floor(Math.random() * 200) + 100) + (75 * speed));
 };
 
-/* PROTOTYPE */
+/* PROTOTYPES */
 
 // Renders character images onto the canvas
 Character.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y)
 }
 
 // Set up prototype delegation relationship to Character prototype using Object.create technique
-Player.prototype = Object.create(Character.prototype);
-Enemy.prototype = Object.create(Character.prototype);
+Player.prototype = Object.create(Character.prototype)
+Enemy.prototype = Object.create(Character.prototype)
 
 // Set up proper subclass constructor delegation to Character
-Player.prototype.constructor = Character;
-Enemy.prototype.constructor = Character;
+Player.prototype.constructor = Character
+Enemy.prototype.constructor = Character
 
 
 // Updates the game to show the latest sprite-positions/movement
@@ -49,13 +49,13 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 707) {
         this.x = -50;
     }
-};
+}
 
 // Resets the position of the player to the original location
 Player.prototype.reset = function() {
     this.x = 303;
     this.y = 460;
-};
+}
 
 // Restarts the game.
 Player.prototype.restart = function() {
@@ -92,7 +92,7 @@ Player.prototype.update = function(dt) {
         this.scoreupdate();
         this.reset();
     }
-};
+}
 
 // Player score
 Player.prototype.scoreupdate = function() {
@@ -122,7 +122,7 @@ Player.prototype.handleInput = function(movement) {
     if(movement === 'left') {
         this.x -= 101;
     }
-};
+}
 
 // Enemy collision function
 Player.prototype.enemyCollision = function() {
